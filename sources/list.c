@@ -12,17 +12,17 @@ int list_push_back(list* l, int key, int value){
     new->value = value;
     new->key = key;
 
-    if(list->size == 0) {
+    if(l->size == 0) {
         new->prev = NULL;
-        list->head = new;
-        list->tail = new;
+        l->head = new;
+        l->tail = new;
     }
     else {
-        list->tail->next = new;
-        new->prev = list->tail;
-        list->tail = new;
+        l->tail->next = new;
+        new->prev = l->tail;
+        l->tail = new;
     }
-    list->size++;
+    l->size++;
     return 0;
 }
 
@@ -34,34 +34,34 @@ int list_push_front(list* l, int key, int value){
     new->value = value;
     new->key = key;
 
-    if(list->size == 0){
+    if(l->size == 0){
         new->next = NULL;
-        list->head = new;
-        list->tail = new;
+        l->head = new;
+        l->tail = new;
     }
     else {
-        list->head->prev = new;
-        new->next = list->head;
-        list->head = new;
+        l->head->prev = new;
+        new->next = l->head;
+        l->head = new;
     }
-    list->size++;
+    l->size++;
     return 0;
 }
 
 int list_pop_back(list* l){
     if(!l) return 1;
 
-    if(list->size == 1){
-        free(list->tail);
-        list->head = NULL;
-        list->tail = NULL;
-        list->size = 0;
+    if(l->size == 1){
+        free(l->tail);
+        l->head = NULL;
+        l->tail = NULL;
+        l->size = 0;
     }
-    else if(list->size > 1){
-        list->tail = list->tail->prev;
-        free(list->tail->next);
-        list->tail->next = NULL;
-        list->size--;
+    else if(l->size > 1){
+        l->tail = l->tail->prev;
+        free(l->tail->next);
+        l->tail->next = NULL;
+        l->size--;
     }
     return 0;
 }
@@ -69,33 +69,39 @@ int list_pop_back(list* l){
 int list_pop_front(list* l){
     if(!l) return 1;
 
-    if(list->size == 1){
-        free(list->head);
-        list->head = NULL;
-        list->tail = NULL;
-        list->size = 0;
+    if(l->size == 1){
+        free(l->head);
+        l->head = NULL;
+        l->tail = NULL;
+        l->size = 0;
     }
-    else if(list->size > 0){
-        list->head = list->head->next;
-        free(list->head);
-        list->head->prev = NULL;
-        list->size--;
+    else if(l->size > 0){
+        l->head = l->head->next;
+        free(l->head);
+        l->head->prev = NULL;
+        l->size--;
     }
     return 0;
 }
 
-int list_pop(list* l, node* n){ //задать вопросы Сергею или Ильнару, допилить на занятии
+int list_pop(list* l, node* n){ 
     if(!l) return 1;
     if(!n) return 1;
 
-    if(list->size == 1){
-        list->size = 0;
-        free(list);
-        list->head = NULL;
-        list->tail = NULL;
+    if(l->size == 1){
+        l->size = 0;
+        free(l);
+        l->head = NULL;
+        l->tail = NULL;
     }
-    else if(list->size > 1){
-         
+    else if(l->size > 1){
+        n->prev->next = n->next;
+        n->next->prev = n->prev;
+        free(n);
+        n->prev = NULL;
+        n->next = NULL;
+        int key = 0;
+        int value = 0;
     }
 }
 
