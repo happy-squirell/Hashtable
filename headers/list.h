@@ -4,8 +4,8 @@
 #include "common.h"
 
 typedef struct node {
-	node* prev;
-	node* next;
+	struct node* prev;
+	struct node* next;
 
 	int key;
 	int value;
@@ -17,10 +17,12 @@ typedef struct list {
 	ull size;
 } list;
 
+int list_create(list* l);
+void list_free(list* l);
 int list_push_back(list* l, int key, int value); //добавляет в конец списка
 int list_push_front(list* l, int key, int value); //добавляет в начало списка
-int list_pop(list* l, node* n) //удаляет из случайного места в списке
-int list_pop_back(list* l) //удаляет с конца списка
-int list_pop_front(list* l) //удаляет из начала списка
+int list_pop(list* l, node* n); //удаляет из случайного места в списке
+int list_pop_back(list* l); //удаляет с конца списка
+int list_pop_front(list* l); //удаляет из начала списка
 
 #endif //LIST_H

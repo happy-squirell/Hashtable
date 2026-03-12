@@ -31,5 +31,5 @@ int vector_resize(vector_list* v, int new_size) {
 
 	v->data = new_data;
 	return 0;
-
+}
 #endif //VECTOR_C

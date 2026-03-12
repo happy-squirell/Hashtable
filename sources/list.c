@@ -1,8 +1,22 @@
 #ifndef LIST_C
 #define LIST_C
 
-#include "list.h"
 #include "common.h"
+#include "list.h"
+
+int list_create(list* l){
+    l->head = NULL;
+    l->tail = NULL;
+    l->size = 0;
+
+    return 0;
+}
+
+void list_free(list* l){
+    while(l->size > 0){
+        list_pop_front(l);
+    }
+}
 
 int list_push_back(list* l, int key, int value){
     if(!l) return 1;
@@ -90,19 +104,18 @@ int list_pop(list* l, node* n){
 
     if(l->size == 1){
         l->size = 0;
-        free(l);
+        free(n);
         l->head = NULL;
         l->tail = NULL;
     }
     else if(l->size > 1){
+        if(l->head == n) l->head = n->next;
+        if(l->tail == n) l->tail = n->prev;
         n->prev->next = n->next;
         n->next->prev = n->prev;
         free(n);
-        n->prev = NULL;
-        n->next = NULL;
-        int key = 0;
-        int value = 0;
     }
+    return 0;
 }
 
 #endif //LIST_C

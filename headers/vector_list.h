@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#define "common.h"
+#include "common.h"
 #include "list.h"
 
 typedef struct vector_list {
@@ -9,7 +9,7 @@ typedef struct vector_list {
 	ull size;
 } vector_list;
 
-int create_vector(vector_list* v, ull size); 
+int vector_create(vector_list* v); 
 void vector_free(vector_list* v);
 int vector_resize(vector_list* v, int new_size);
 
